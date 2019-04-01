@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+
+import "google/protobuf/struct.proto";
+
+
+package user;
+
+
+service User {
+    rpc signup (UserSignUpRequest) returns (UserSignUpReply) {}
+    rpc login (UserLoginRequest) returns (UserLoginReply) {}
+}
+
+
+message UserLoginRequest {
+    required string password = 1;
+    string email = 2;
+    string cpf = 3;
+    string siape = 4;
+    string phone = 5;
+    string reply = 6;
+}
+message UserLoginReply {
+    required string token = 1;
+    required Struct user = 2;
+}
+
+
+message UserSignUpRequest {
+    enum UserTypes {
+        STUDENT = 1;
+        STAFF = 2;
+        PROFESSOR = 3;
+    }
+    required string email = 1;
+    required string cpf = 2;
+    required string password = 3;
+    required string password2 = 4;
+    required string completeName = 5;
+    repeated UserTypes types = 6;
+    string siape = 7;
+    string phone = 8;
+    string reply = 9;
+}
+message UserSignUpReply {
+    required Struct user = 1;
+}
